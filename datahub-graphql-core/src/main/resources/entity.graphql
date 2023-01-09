@@ -1384,6 +1384,98 @@ type DataProduct implements EntityWithRelationships & Entity & BrowsableEntity {
     privileges: EntityPrivileges
 }
 
+
+"""
+A DataProduct entity
+"""
+type DataProduct implements EntityWithRelationships & Entity & BrowsableEntity {
+    """
+    The primary key of the DataProduct
+    """
+    urn: String!
+
+    """
+    The standard Entity Type
+    """
+    type: EntityType!
+
+    """
+    Standardized platform urn where the DataProduct is defined
+    """
+    platform: DataPlatform!
+
+    """
+    The parent container in which the entity resides
+    """
+    container: Container
+
+    """
+    The browse paths corresponding to the DataProduct. If no Browse Paths have been generated before, this will be null.
+    """
+    browsePaths: [BrowsePath!]
+
+    """
+    Recursively get the lineage of containers for this entity
+    """
+    parentContainers: ParentContainersResult
+
+    """
+    An additional set of read only properties
+    """
+    properties: DataProductProperties
+
+    """
+    Ownership metadata of the DataProduct
+    """
+    ownership: Ownership
+
+    """
+    The deprecation status of the DataProduct
+    """
+    deprecation: Deprecation
+
+    """
+    Status of the DataProduct
+    """
+    status: Status
+
+    """
+    Tags used for searching dataset
+    """
+    tags: GlobalTags
+
+    """
+    The structured glossary terms associated with the DataProduct
+    """
+    glossaryTerms: GlossaryTerms
+
+    """
+    The Domain associated with the DataProduct
+    """
+    domain: DomainAssociation
+
+    """
+    Edges extending from this entity
+    """
+    relationships(input: RelationshipsInput!): EntityRelationshipsResult
+
+    """
+    Edges extending from this entity grouped by direction in the lineage graph
+    """
+    lineage(input: LineageInput!): EntityLineageResult
+
+    """
+    Experimental API.
+    For fetching extra entities that do not have custom UI code yet
+    """
+    aspects(input: AspectParams): [RawAspect!]
+
+    """
+    Privileges given to a user relevant to this entity
+    """
+    privileges: EntityPrivileges
+}
+
 type FineGrainedLineage {
     upstreams: [SchemaFieldRef!]
     downstreams: [SchemaFieldRef!]
@@ -1671,6 +1763,26 @@ type DataProductProperties {
     customProperties: [CustomPropertiesEntry!]
 }
 
+"""
+Additional read only properties about a DataProduct
+"""
+type DataProductProperties {
+
+    """
+    The name of the DataProduct used in display
+    """
+    name: String!
+
+    """
+    Read only technical description for dataset
+    """
+    description: String
+
+    """
+    Custom properties of the Dataset
+    """
+    customProperties: [CustomPropertiesEntry!]
+}
 
 """
 Additional read only properties about a DataPlatformInstance
