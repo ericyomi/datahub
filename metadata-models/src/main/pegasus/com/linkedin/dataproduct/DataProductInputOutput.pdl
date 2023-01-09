@@ -1,0 +1,83 @@
+namespace com.linkedin.dataproduct
+
+import com.linkedin.common.DatasetUrn
+import com.linkedin.common.DataJobUrn
+import com.linkedin.dataset.FineGrainedLineage
+import com.linkedin.common.Urn
+import com.linkedin.common.Edge
+
+/**
+ * Information about the inputs and outputs of a DataProduct
+ */
+@Aspect = {
+  "name": "dataProductInputOutput"
+}
+record DataProductInputOutput {
+  /**
+   * Input datasets consumed by the DataProduct
+   */
+  @Relationship = {
+    "/*/destinationUrn": {
+      "name": "Consumes",
+      "entityTypes": [ "dataset" ],
+      "isLineage": true,
+      "createdOn": "inputDatasetEdges/*/created/time"
+      "createdActor": "inputDatasetEdges/*/created/actor"
+      "updatedOn": "inputDatasetEdges/*/lastModified/time"
+      "updatedActor": "inputDatasetEdges/*/lastModified/actor"
+      "properties": "inputDatasetEdges/*/properties"
+    }
+  }
+  @Searchable = {
+    "/*/destinationUrn": {
+      "fieldName": "inputDatasetEdges",
+      "fieldType": "URN",
+      "numValuesFieldName": "numInputDatasets",
+      "queryByDefault": false
+    }
+  }
+  inputDatasetEdges: optional array[Edge]
+
+  /**
+   * Output datasets produced by the DataProduct
+   */
+  @Relationship = {
+    "/*/destinationUrn": {
+      "name": "Produces",
+      "entityTypes": [ "dataset" ],
+      "isUpstream": false,
+      "isLineage": true,
+      "createdOn": "outputDatasetEdges/*/created/time"
+      "createdActor": "outputDatasetEdges/*/created/actor"
+      "updatedOn": "outputDatasetEdges/*/lastModified/time"
+      "updatedActor": "outputDatasetEdges/*/lastModified/actor"
+      "properties": "outputDatasetEdges/*/properties"
+    }
+  }
+  @Searchable = {
+    "/*/destinationUrn": {
+      "fieldName": "outputDatasetEdges",
+      "fieldType": "URN",
+      "numValuesFieldName": "numOutputDatasets",
+      "queryByDefault": false
+    }
+  }
+  outputDatasetEdges: optional array[Edge]
+
+  /**
+   * Input datajobs that this DataProduct depends on
+   */
+  @Relationship = {
+    "/*/destinationUrn": {
+      "name": "DownstreamOf",
+      "entityTypes": [ "dataJob" ],
+      "isLineage": true,
+      "createdOn": "inputDatajobEdges/*/created/time"
+      "createdActor": "inputDatajobEdges/*/created/actor"
+      "updatedOn": "inputDatajobEdges/*/lastModified/time"
+      "updatedActor": "inputDatajobEdges/*/lastModified/actor"
+      "properties": "inputDatajobEdges/*/properties"
+    }
+  }
+  inputDatajobEdges: optional array[Edge]
+}

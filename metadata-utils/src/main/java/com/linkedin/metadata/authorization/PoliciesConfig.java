@@ -242,6 +242,11 @@ public class PoliciesConfig {
       "View Dataset Profile",
       "The ability to access dataset profile (snapshot statistics)");
 
+  public static final Privilege VIEW_DATA_PRODUCT_USAGE_PRIVILEGE = Privilege.of(
+          "VIEW_DATA_PRODUCT_USAGE",
+          "View DataProduct Usage",
+          "The ability to access data product usage information (includes usage statistics and queries).");
+
   // Tag Privileges
   public static final Privilege EDIT_TAG_COLOR_PRIVILEGE = Privilege.of(
       "EDIT_TAG_COLOR",
@@ -285,6 +290,18 @@ public class PoliciesConfig {
               EDIT_DATASET_COL_GLOSSARY_TERMS_PRIVILEGE,
               EDIT_ENTITY_ASSERTIONS_PRIVILEGE,
               EDIT_LINEAGE_PRIVILEGE, EDIT_ENTITY_EMBED_PRIVILEGE))
+          .flatMap(Collection::stream)
+          .collect(Collectors.toList())
+  );
+
+  public static final ResourcePrivileges DATA_PRODUCT_PRIVILEGES = ResourcePrivileges.of(
+      "dataProduct",
+      "DataProducts",
+      "DataProducts indexed by DataHub", Stream.of(
+          COMMON_ENTITY_PRIVILEGES,
+          ImmutableList.of(
+              VIEW_DATA_PRODUCT_USAGE_PRIVILEGE,
+              EDIT_LINEAGE_PRIVILEGE))
           .flatMap(Collection::stream)
           .collect(Collectors.toList())
   );
