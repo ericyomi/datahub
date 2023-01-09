@@ -35,6 +35,11 @@ type Query {
     dataset(urn: String!): Dataset
 
     """
+    Fetch a DataProduct by primary key (urn)
+    """
+    dataProduct(urn: String!): DataProduct
+
+    """
     Fetch a Dataset by primary key (urn) at a point in time based on aspect versions (versionStamp)
     """
     versionedDataset(urn: String!, versionStamp: String): VersionedDataset
@@ -214,6 +219,16 @@ type Mutation {
     Update the metadata about a batch of Datasets
     """
     updateDatasets(input: [BatchDatasetUpdateInput!]!): [Dataset]
+
+    """
+    Update the metadata about a particular DataProduct
+    """
+    updateDataProduct(urn: String!, input: DataProductUpdateInput!): DataProduct
+
+    """
+    Update the metadata about a batch of DataProducts
+    """
+    updateDataProducts(input: [BatchDataProductUpdateInput!]!): [DataProduct]
 
     """
     Update the metadata about a particular Chart
@@ -626,6 +641,11 @@ enum EntityType {
     The Dataset Entity
     """
     DATASET
+
+    """
+    The DataProduct Entity
+    """
+    DATA_PRODUCT
 
     """
     The CorpUser Entity
@@ -1243,6 +1263,98 @@ type Dataset implements EntityWithRelationships & Entity & BrowsableEntity {
     privileges: EntityPrivileges
 }
 
+
+"""
+A DataProduct entity
+"""
+type DataProduct implements EntityWithRelationships & Entity & BrowsableEntity {
+    """
+    The primary key of the DataProduct
+    """
+    urn: String!
+
+    """
+    The standard Entity Type
+    """
+    type: EntityType!
+
+    """
+    Standardized platform urn where the DataProduct is defined
+    """
+    platform: DataPlatform!
+
+    """
+    The parent container in which the entity resides
+    """
+    container: Container
+
+    """
+    The browse paths corresponding to the DataProduct. If no Browse Paths have been generated before, this will be null.
+    """
+    browsePaths: [BrowsePath!]
+
+    """
+    Recursively get the lineage of containers for this entity
+    """
+    parentContainers: ParentContainersResult
+
+    """
+    An additional set of read only properties
+    """
+    properties: DataProductProperties
+
+    """
+    Ownership metadata of the DataProduct
+    """
+    ownership: Ownership
+
+    """
+    The deprecation status of the DataProduct
+    """
+    deprecation: Deprecation
+
+    """
+    Status of the DataProduct
+    """
+    status: Status
+
+    """
+    Tags used for searching dataset
+    """
+    tags: GlobalTags
+
+    """
+    The structured glossary terms associated with the DataProduct
+    """
+    glossaryTerms: GlossaryTerms
+
+    """
+    The Domain associated with the DataProduct
+    """
+    domain: DomainAssociation
+
+    """
+    Edges extending from this entity
+    """
+    relationships(input: RelationshipsInput!): EntityRelationshipsResult
+
+    """
+    Edges extending from this entity grouped by direction in the lineage graph
+    """
+    lineage(input: LineageInput!): EntityLineageResult
+
+    """
+    Experimental API.
+    For fetching extra entities that do not have custom UI code yet
+    """
+    aspects(input: AspectParams): [RawAspect!]
+
+    """
+    Privileges given to a user relevant to this entity
+    """
+    privileges: EntityPrivileges
+}
+
 type FineGrainedLineage {
     upstreams: [SchemaFieldRef!]
     downstreams: [SchemaFieldRef!]
@@ -1507,6 +1619,27 @@ type DatasetProperties {
     External URL associated with the Dataset
     """
     externalUrl: String
+}
+
+"""
+Additional read only properties about a DataProduct
+"""
+type DataProductProperties {
+
+    """
+    The name of the DataProduct used in display
+    """
+    name: String!
+
+    """
+    Read only technical description for dataset
+    """
+    description: String
+
+    """
+    Custom properties of the Dataset
+    """
+    customProperties: [CustomPropertiesEntry!]
 }
 
 
@@ -1925,6 +2058,11 @@ enum PlatformType {
     Value for other platforms
     """
     OTHERS
+
+    """
+    Value for a Data Mesh
+    """
+    DATA_MESH
 }
 
 """
@@ -3881,6 +4019,41 @@ input BatchDatasetUpdateInput {
     update: DatasetUpdateInput!
 }
 
+"""
+Arguments provided to update a DataProduct Entity
+"""
+input DataProductUpdateInput {
+    """
+    Update to ownership
+    """
+    ownership: OwnershipUpdate
+
+    """
+    Update to deprecation status
+    """
+    deprecation: DatasetDeprecationUpdate
+
+    """
+    Update to tags
+    """
+    tags: GlobalTagsUpdate
+}
+
+"""
+Arguments provided to batch update DataProduct entities
+"""
+input BatchDataProductUpdateInput {
+
+    """
+    Primary key of the Dataset to which the update will be applied
+    """
+    urn: String!
+
+    """
+    Arguments provided to update the DataProduct
+    """
+    update: DataProductUpdateInput!
+}
 
 """
 Update to editable schema metadata of the dataset

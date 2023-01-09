@@ -1,0 +1,18 @@
+namespace com.linkedin.dataproduct
+
+import com.linkedin.timeseries.TimeseriesAspectBase
+
+/**
+ * Stats corresponding to DataProduct's usage.
+ */
+@Aspect = {
+  "name": "dataProductUsageStatistics",
+  "type": "timeseries",
+}
+record DataProductUsageStatistics includes TimeseriesAspectBase {
+  /**
+   * Unique user count
+   */
+  @TimeseriesField = {}
+  uniqueUserCount: optional int
+}

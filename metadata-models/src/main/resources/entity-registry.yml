@@ -290,4 +290,15 @@ entities:
     keyAspect: dataHubViewKey
     aspects:
       - dataHubViewInfo
+  - name: dataProduct
+    doc: Data products are the foundational unit of a Data Mesh architecture.
+    category: core
+    keyAspect: dataProductKey
+    aspects:
+      - domain
+      - ownership
+      - status
+      - dataProductInputOutput
+      - dataProductUsageStatistics
+      - deprecation
 events:

@@ -84,6 +84,11 @@ record DataPlatformInfo {
        * Value for a search engine, e.g seas
        */
       SEARCH_ENGINE
+
+      /**
+       * Value for a Data Mesh
+       */
+      DATA_MESH
     }
 
   /**

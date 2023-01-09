@@ -1,0 +1,56 @@
+namespace com.linkedin.dataproduct
+
+import com.linkedin.common.Uri
+import com.linkedin.common.CustomProperties
+import com.linkedin.common.ExternalReference
+import com.linkedin.common.TimeStamp
+
+/**
+ * Properties associated with a DataProduct
+ */
+@Aspect = {
+  "name": "dataProductProperties"
+}
+record DataProductProperties includes CustomProperties {
+
+  /**
+   * Display name of the DataProduct
+   */
+  @Searchable = {
+    "fieldType": "TEXT_PARTIAL",
+    "enableAutocomplete": true,
+    "boostScore": 10.0
+  }
+  name: string
+
+  /**
+   * Documentation of the DataProduct
+   */
+  @Searchable = {
+    "fieldType": "TEXT",
+    "hasValuesFieldName": "hasDescription"
+  }
+  description: optional string
+
+  /**
+   * A timestamp documenting when the DataProduct was created in the Data Mesh (not on DataHub)
+   */
+  @Searchable = {
+    "/time": {
+      "fieldName": "createdAt",
+      "fieldType": "DATETIME"
+    }
+  }
+  created: optional TimeStamp
+
+  /**
+   * A timestamp documenting when the DataProduct was last modified in the Data Mesh (not on DataHub)
+   */
+  @Searchable = {
+    "/time": {
+      "fieldName": "lastModifiedAt",
+      "fieldType": "DATETIME"
+    }
+  }
+  lastModified: optional TimeStamp
+}

@@ -24,6 +24,7 @@ public class Constants {
   public static final String CORP_USER_ENTITY_NAME = "corpuser";
   public static final String CORP_GROUP_ENTITY_NAME = "corpGroup";
   public static final String DATASET_ENTITY_NAME = "dataset";
+  public static final String DATA_PRODUCT_ENTITY_NAME = "dataProduct";
   public static final String CHART_ENTITY_NAME = "chart";
   public static final String DASHBOARD_ENTITY_NAME = "dashboard";
   public static final String DATA_FLOW_ENTITY_NAME = "dataFlow";
@@ -104,6 +105,11 @@ public class Constants {
   public static final String EDITABLE_SCHEMA_METADATA_ASPECT_NAME = "editableSchemaMetadata";
   public static final String VIEW_PROPERTIES_ASPECT_NAME = "viewProperties";
   public static final String DATASET_PROFILE_ASPECT_NAME = "datasetProfile";
+
+  // DataProduct
+  public static final String DATA_PRODUCT_KEY_ASPECT_NAME = "dataProductKey";
+  public static final String DATA_PRODUCT_PROPERTIES_ASPECT_NAME = "dataProductProperties";
+  public static final String DATA_PRODUCT_INPUT_OUTPUT_ASPECT_NAME = "dataProductInputOutput";
 
   // Chart
   public static final String CHART_KEY_ASPECT_NAME = "chartKey";

@@ -1,0 +1,26 @@
+namespace com.linkedin.metadata.key
+
+import com.linkedin.common.Urn
+
+/**
+ * Key for a DataProduct
+ */
+@Aspect = {
+  "name": "dataProductKey"
+}
+record DataProductKey {
+  /**
+  * Data platform urn associated with the DataProduct
+  */
+  platform: Urn
+
+  /**
+  * Unique id for the Data Product. This id should be globally unique for a Data Mesh'
+  */
+  @Searchable = {
+    "fieldName": "id",
+    "fieldType": "TEXT_PARTIAL",
+    "boostScore": 10.0
+  }
+  dataProductId: string
+}
