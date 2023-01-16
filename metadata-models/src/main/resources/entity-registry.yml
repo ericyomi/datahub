@@ -295,7 +295,7 @@ entities:
     category: core
     keyAspect: dataProductKey
     aspects:
-      - domain
+      - domains
       - ownership
       - status
       - dataProductInputOutput

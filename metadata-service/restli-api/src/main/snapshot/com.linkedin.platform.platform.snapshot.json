@@ -1879,8 +1879,9 @@
         "type" : "enum",
         "name" : "PlatformType",
         "doc" : "Platform types available at LinkedIn",
-        "symbols" : [ "FILE_SYSTEM", "KEY_VALUE_STORE", "MESSAGE_BROKER", "OBJECT_STORE", "OLAP_DATASTORE", "OTHERS", "QUERY_ENGINE", "RELATIONAL_DB", "SEARCH_ENGINE" ],
+        "symbols" : [ "FILE_SYSTEM", "KEY_VALUE_STORE", "MESSAGE_BROKER", "OBJECT_STORE", "OLAP_DATASTORE", "OTHERS", "QUERY_ENGINE", "RELATIONAL_DB", "SEARCH_ENGINE", "DATA_MESH" ],
         "symbolDocs" : {
+          "DATA_MESH" : "Value for a Data Mesh",
           "FILE_SYSTEM" : "Value for a file system, e.g. hdfs",
           "KEY_VALUE_STORE" : "Value for a key value store, e.g. espresso, voldemort",
           "MESSAGE_BROKER" : "Value for a message broker, e.g. kafka",

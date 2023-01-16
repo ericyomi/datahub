@@ -57,7 +57,13 @@ public class DataProductType implements BrowsableEntityType<DataProduct, String>
     static final Set<String> ASPECTS_TO_RESOLVE = ImmutableSet.of(
         DATA_PRODUCT_KEY_ASPECT_NAME,
         DATA_PRODUCT_PROPERTIES_ASPECT_NAME,
-        DATA_PRODUCT_INPUT_OUTPUT_ASPECT_NAME
+        DATA_PRODUCT_INPUT_OUTPUT_ASPECT_NAME,
+        DOMAINS_ASPECT_NAME,
+        CONTAINER_ASPECT_NAME,
+        STATUS_ASPECT_NAME,
+        GLOSSARY_TERMS_ASPECT_NAME,
+        DEPRECATION_ASPECT_NAME,
+        GLOBAL_TAGS_ASPECT_NAME
     );
 
     private static final Set<String> FACET_FIELDS = ImmutableSet.of("platform");

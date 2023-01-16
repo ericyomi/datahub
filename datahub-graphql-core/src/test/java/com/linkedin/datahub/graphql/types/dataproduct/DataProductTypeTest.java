@@ -5,17 +5,24 @@ import com.datahub.authentication.Authentication;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
-import com.linkedin.common.*;
-import com.linkedin.common.url.Url;
+import com.linkedin.common.Ownership;
+import com.linkedin.common.OwnerArray;
+import com.linkedin.common.Owner;
+import com.linkedin.common.OwnershipType;
+import com.linkedin.common.Status;
+import com.linkedin.common.GlobalTags;
+import com.linkedin.common.TagAssociationArray;
+import com.linkedin.common.GlossaryTerms;
+import com.linkedin.common.TagAssociation;
+import com.linkedin.common.GlossaryTermAssociationArray;
+import com.linkedin.common.GlossaryTermAssociation;
 import com.linkedin.common.urn.GlossaryTermUrn;
 import com.linkedin.common.urn.TagUrn;
 import com.linkedin.common.urn.Urn;
 import com.linkedin.dataproduct.DataProductProperties;
-import com.linkedin.data.template.StringArray;
 import com.linkedin.datahub.graphql.QueryContext;
 import com.linkedin.datahub.graphql.generated.DataProduct;
 import com.linkedin.datahub.graphql.generated.EntityType;
-import com.linkedin.datahub.graphql.types.dataproduct.DataProductType;
 import com.linkedin.entity.Aspect;
 import com.linkedin.entity.EntityResponse;
 import com.linkedin.entity.EnvelopedAspect;
@@ -37,9 +44,9 @@ import static org.testng.Assert.*;
 
 public class DataProductTypeTest {
 
-  private static final String TEST_DATA_PRODUCT_1_URN = "urn:li:my-datamesh:my-dp-1";
+  private static final String TEST_DATA_PRODUCT_1_URN = "urn:li:myDataMesh:myDP1";
   private static final DataProductKey TEST_DATA_PRODUCT_1_KEY = new DataProductKey()
-      .setDataProductId("my-dp-1");
+      .setDataProductId("myDP1");
   private static final DataProductProperties TEST_DATA_PRODUCT_1_PROPERTIES = new DataProductProperties()
       .setDescription("test description")
       .setName("Test Container");
@@ -97,6 +104,10 @@ public class DataProductTypeTest {
         Constants.CONTAINER_ASPECT_NAME,
         new EnvelopedAspect().setValue(new Aspect(TEST_DATA_PRODUCT_1_CONTAINER.data()))
     );
+    dataProduct1Aspects.put(
+        Constants.DATA_PRODUCT_PROPERTIES_ASPECT_NAME,
+        new EnvelopedAspect().setValue(new Aspect(TEST_DATA_PRODUCT_1_PROPERTIES.data()))
+    );
     Mockito.when(client.batchGetV2(
         Mockito.eq(Constants.DATA_PRODUCT_ENTITY_NAME),
         Mockito.eq(new HashSet<>(ImmutableSet.of(dataProductUrn1, dataProductUrn2))),
@@ -129,7 +140,7 @@ public class DataProductTypeTest {
 
     DataProduct dataProduct1 = result.get(0).getData();
     assertEquals(dataProduct1.getUrn(), TEST_DATA_PRODUCT_1_URN);
-    assertEquals(dataProduct1.getType(), EntityType.CONTAINER);
+    assertEquals(dataProduct1.getType(), EntityType.DATA_PRODUCT);
     assertEquals(dataProduct1.getOwnership().getOwners().size(), 1);
     assertEquals(dataProduct1.getProperties().getDescription(), "test description");
     assertEquals(dataProduct1.getProperties().getName(), "Test Container");
