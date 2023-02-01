@@ -66,7 +66,7 @@ public class DataProductType implements BrowsableEntityType<DataProduct, String>
         GLOBAL_TAGS_ASPECT_NAME
     );
 
-    private static final Set<String> FACET_FIELDS = ImmutableSet.of("platform");
+    private static final Set<String> FACET_FIELDS = ImmutableSet.of("origin", "platform");
     private static final String ENTITY_NAME = "dataProduct";
 
     private final EntityClient _entityClient;

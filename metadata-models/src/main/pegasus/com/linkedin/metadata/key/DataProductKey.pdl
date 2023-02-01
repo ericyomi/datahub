@@ -1,6 +1,7 @@
 namespace com.linkedin.metadata.key
 
 import com.linkedin.common.Urn
+import com.linkedin.common.FabricType
 
 /**
  * Key for a DataProduct
@@ -23,4 +24,15 @@ record DataProductKey {
     "boostScore": 10.0
   }
   dataProductId: string
+
+  /**
+  * Fabric type where dataProduct belongs to or where it was generated.
+  */
+  @Searchable = {
+    "fieldType": "TEXT_PARTIAL",
+    "addToFilters": true,
+    "filterNameOverride": "Environment",
+    "queryByDefault": false
+  }
+  origin: FabricType
 }

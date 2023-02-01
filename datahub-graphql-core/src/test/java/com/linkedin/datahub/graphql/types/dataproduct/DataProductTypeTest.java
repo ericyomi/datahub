@@ -44,7 +44,7 @@ import static org.testng.Assert.*;
 
 public class DataProductTypeTest {
 
-  private static final String TEST_DATA_PRODUCT_1_URN = "urn:li:myDataMesh:myDP1";
+  private static final String TEST_DATA_PRODUCT_1_URN = "urn:li:dataProduct:(urn:dataPlatform:f135DaaP, myDP1, PROD)";
   private static final DataProductKey TEST_DATA_PRODUCT_1_KEY = new DataProductKey()
       .setDataProductId("myDP1");
   private static final DataProductProperties TEST_DATA_PRODUCT_1_PROPERTIES = new DataProductProperties()
