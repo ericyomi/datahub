@@ -3314,6 +3314,11 @@ type CorpUserInfo {
     two uppercase letters country code
     """
     countryCode: String
+
+    """
+    Custom properties of the ldap
+    """
+    customProperties: [CustomPropertiesEntry!]
 }
 
 """
@@ -3374,6 +3379,11 @@ type CorpUserProperties {
     two uppercase letters country code
     """
     countryCode: String
+
+    """
+    Custom properties of the ldap
+    """
+    customProperties: [CustomPropertiesEntry!]
 }
 
 """
