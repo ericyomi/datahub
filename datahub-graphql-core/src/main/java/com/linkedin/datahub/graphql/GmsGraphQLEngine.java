@@ -678,6 +678,7 @@ public class GmsGraphQLEngine {
             .dataFetcher("browse", new BrowseResolver(browsableTypes))
             .dataFetcher("browsePaths", new BrowsePathsResolver(browsableTypes))
             .dataFetcher("dataset", getResolver(datasetType))
+            .dataFetcher("datasetProduct", getResolver(dataProductType))
             .dataFetcher("versionedDataset", getResolver(versionedDatasetType,
                 (env) -> new VersionedUrn().setUrn(UrnUtils.getUrn(env.getArgument(URN_FIELD_NAME)))
                     .setVersionStamp(env.getArgument(VERSION_STAMP_FIELD_NAME))))

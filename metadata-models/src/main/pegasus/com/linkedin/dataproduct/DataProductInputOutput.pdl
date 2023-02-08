@@ -19,7 +19,7 @@ record DataProductInputOutput {
   @Relationship = {
     "/*/destinationUrn": {
       "name": "Consumes",
-      "entityTypes": [ "dataset" ],
+      "entityTypes": [ "dataset", "dataProduct" ],
       "isLineage": true,
       "createdOn": "inputDatasetEdges/*/created/time"
       "createdActor": "inputDatasetEdges/*/created/actor"
@@ -44,7 +44,7 @@ record DataProductInputOutput {
   @Relationship = {
     "/*/destinationUrn": {
       "name": "Produces",
-      "entityTypes": [ "dataset" ],
+      "entityTypes": [ "dataset", "dataProduct" ],
       "isUpstream": false,
       "isLineage": true,
       "createdOn": "outputDatasetEdges/*/created/time"
@@ -70,7 +70,7 @@ record DataProductInputOutput {
   @Relationship = {
     "/*/destinationUrn": {
       "name": "DownstreamOf",
-      "entityTypes": [ "dataJob" ],
+      "entityTypes": [ "dataJob", "dataProduct" ],
       "isLineage": true,
       "createdOn": "inputDatajobEdges/*/created/time"
       "createdActor": "inputDatajobEdges/*/created/actor"
